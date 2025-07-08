@@ -10,7 +10,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 登录用户身份权限
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class LoginUser implements UserDetails
 {

@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 操作日志记录表 oper_log
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysOperLog extends BaseEntity
 {

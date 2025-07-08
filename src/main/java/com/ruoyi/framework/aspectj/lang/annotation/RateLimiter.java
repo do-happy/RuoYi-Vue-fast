@@ -11,7 +11,7 @@ import com.ruoyi.framework.aspectj.lang.enums.LimitType;
 /**
  * 限流注解
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

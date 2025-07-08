@@ -25,7 +25,7 @@ import com.ruoyi.project.system.service.ISysPostService;
 /**
  * 岗位信息操作处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 @RequestMapping("/system/post")

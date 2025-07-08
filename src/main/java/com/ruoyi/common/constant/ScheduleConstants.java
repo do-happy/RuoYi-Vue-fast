@@ -3,7 +3,7 @@ package com.ruoyi.common.constant;
 /**
  * 任务调度通用常量
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class ScheduleConstants
 {

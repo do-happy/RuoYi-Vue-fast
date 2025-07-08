@@ -22,7 +22,7 @@ import com.ruoyi.project.monitor.service.ISysJobLogService;
 /**
  * 调度日志操作处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 @RequestMapping("/monitor/jobLog")

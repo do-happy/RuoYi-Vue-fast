@@ -12,7 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 岗位表 sys_post
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysPost extends BaseEntity
 {

@@ -17,7 +17,7 @@ import com.ruoyi.framework.interceptor.RepeatSubmitInterceptor;
 /**
  * 通用配置
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Configuration
 public class ResourcesConfig implements WebMvcConfigurer

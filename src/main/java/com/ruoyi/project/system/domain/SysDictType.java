@@ -12,7 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 字典类型表 sys_dict_type
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysDictType extends BaseEntity
 {

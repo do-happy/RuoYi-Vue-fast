@@ -6,7 +6,7 @@ import com.ruoyi.project.monitor.domain.SysOperLog;
 /**
  * 操作日志 服务层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface ISysOperLogService
 {

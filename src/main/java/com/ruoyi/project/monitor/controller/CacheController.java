@@ -25,7 +25,7 @@ import com.ruoyi.project.monitor.domain.SysCache;
 /**
  * 缓存监控
  * 
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 @RequestMapping("/monitor/cache")

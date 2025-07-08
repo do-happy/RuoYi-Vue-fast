@@ -36,7 +36,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 操作日志记录处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Aspect
 @Component

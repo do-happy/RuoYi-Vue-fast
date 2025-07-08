@@ -13,7 +13,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 部门表 sys_dept
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysDept extends BaseEntity
 {

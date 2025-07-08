@@ -16,7 +16,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 定时任务调度表 sys_job
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysJob extends BaseEntity
 {

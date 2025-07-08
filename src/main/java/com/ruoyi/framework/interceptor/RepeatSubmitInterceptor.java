@@ -14,7 +14,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 /**
  * 防止重复提交拦截器
  *
- * @author ruoyi
+ * @Author lc
  */
 @Component
 public abstract class RepeatSubmitInterceptor implements HandlerInterceptor

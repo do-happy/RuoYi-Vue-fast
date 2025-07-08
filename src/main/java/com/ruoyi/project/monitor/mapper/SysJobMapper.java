@@ -6,7 +6,7 @@ import com.ruoyi.project.monitor.domain.SysJob;
 /**
  * 调度任务信息 数据层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface SysJobMapper
 {

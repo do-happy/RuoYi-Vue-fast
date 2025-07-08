@@ -16,7 +16,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 登录密码方法
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Component
 public class SysPasswordService

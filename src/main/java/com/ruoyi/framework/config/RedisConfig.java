@@ -12,13 +12,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * redis配置
  * 
- * @author ruoyi
+ * @Author lc
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport
 {
-    @Bean
+//    @Bean
     @SuppressWarnings(value = { "unchecked", "rawtypes" })
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory)
     {
@@ -39,7 +39,7 @@ public class RedisConfig extends CachingConfigurerSupport
         return template;
     }
 
-    @Bean
+//    @Bean
     public DefaultRedisScript<Long> limitScript()
     {
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();

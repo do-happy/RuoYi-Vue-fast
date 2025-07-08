@@ -8,7 +8,7 @@ import com.ruoyi.project.monitor.domain.SysJob;
 /**
  * 定时任务调度信息信息 服务层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface ISysJobService
 {

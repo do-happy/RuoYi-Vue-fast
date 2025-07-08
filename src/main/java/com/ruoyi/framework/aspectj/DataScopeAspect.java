@@ -20,7 +20,7 @@ import com.ruoyi.project.system.domain.SysUser;
 /**
  * 数据过滤处理
  *
- * @author ruoyi
+ * @Author lc
  */
 @Aspect
 @Component

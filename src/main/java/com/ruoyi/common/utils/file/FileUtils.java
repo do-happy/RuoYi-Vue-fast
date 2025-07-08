@@ -23,7 +23,7 @@ import com.ruoyi.framework.config.RuoYiConfig;
 /**
  * 文件处理工具类
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class FileUtils
 {

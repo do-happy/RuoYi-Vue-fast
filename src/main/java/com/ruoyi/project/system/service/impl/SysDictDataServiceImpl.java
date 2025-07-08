@@ -11,7 +11,7 @@ import com.ruoyi.project.system.service.ISysDictDataService;
 /**
  * 字典 业务层处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService

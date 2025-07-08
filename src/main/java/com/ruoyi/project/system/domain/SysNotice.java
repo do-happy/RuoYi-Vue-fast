@@ -10,7 +10,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 通知公告表 sys_notice
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysNotice extends BaseEntity
 {

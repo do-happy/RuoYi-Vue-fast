@@ -6,7 +6,7 @@ import com.ruoyi.project.system.domain.SysRole;
 /**
  * 角色表 数据层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface SysRoleMapper
 {

@@ -34,7 +34,7 @@ import com.ruoyi.project.system.service.ISysUserService;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService

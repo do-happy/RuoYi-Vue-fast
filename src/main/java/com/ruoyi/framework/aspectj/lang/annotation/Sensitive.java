@@ -12,7 +12,7 @@ import com.ruoyi.framework.config.SensitiveJsonSerializer;
 /**
  * 数据脱敏注解
  *
- * @author ruoyi
+ * @Author lc
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

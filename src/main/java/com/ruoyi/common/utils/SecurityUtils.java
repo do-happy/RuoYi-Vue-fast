@@ -16,7 +16,7 @@ import com.ruoyi.project.system.domain.SysRole;
 /**
  * 安全服务工具类
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SecurityUtils
 {

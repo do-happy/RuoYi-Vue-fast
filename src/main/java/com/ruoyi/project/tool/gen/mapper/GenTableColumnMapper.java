@@ -6,7 +6,7 @@ import com.ruoyi.project.tool.gen.domain.GenTableColumn;
 /**
  * 业务字段 数据层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface GenTableColumnMapper
 {

@@ -9,7 +9,7 @@ import com.ruoyi.framework.config.RuoYiConfig;
 /**
  * 首页
  *
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 public class SysIndexController

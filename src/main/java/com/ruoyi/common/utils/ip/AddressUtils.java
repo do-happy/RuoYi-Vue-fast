@@ -12,7 +12,7 @@ import com.ruoyi.framework.config.RuoYiConfig;
 /**
  * 获取地址类
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class AddressUtils
 {

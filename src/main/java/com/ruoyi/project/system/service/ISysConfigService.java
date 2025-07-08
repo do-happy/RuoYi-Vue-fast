@@ -6,7 +6,7 @@ import com.ruoyi.project.system.domain.SysConfig;
 /**
  * 参数配置 服务层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface ISysConfigService
 {

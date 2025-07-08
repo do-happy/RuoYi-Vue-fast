@@ -7,7 +7,7 @@ import com.ruoyi.project.system.domain.SysDictType;
 /**
  * 字典 业务层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface ISysDictTypeService
 {

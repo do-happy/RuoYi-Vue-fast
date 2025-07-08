@@ -23,7 +23,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 /**
  * 通用请求处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 @RequestMapping("/common")

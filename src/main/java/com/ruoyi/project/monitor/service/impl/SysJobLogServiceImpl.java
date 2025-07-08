@@ -10,7 +10,7 @@ import com.ruoyi.project.monitor.service.ISysJobLogService;
 /**
  * 定时任务调度日志信息 服务层
  * 
- * @author ruoyi
+ * @Author lc
  */
 @Service
 public class SysJobLogServiceImpl implements ISysJobLogService

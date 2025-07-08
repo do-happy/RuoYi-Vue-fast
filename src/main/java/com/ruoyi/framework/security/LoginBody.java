@@ -3,7 +3,7 @@ package com.ruoyi.framework.security;
 /**
  * 用户登录对象
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class LoginBody
 {

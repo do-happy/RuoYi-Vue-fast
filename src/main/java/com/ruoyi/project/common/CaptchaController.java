@@ -23,7 +23,7 @@ import com.ruoyi.project.system.service.ISysConfigService;
 /**
  * 验证码操作处理
  * 
- * @author ruoyi
+ * @Author lc
  */
 @RestController
 public class CaptchaController

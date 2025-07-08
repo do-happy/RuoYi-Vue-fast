@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.StringUtils;
 /**
  * 缓存信息
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class SysCache
 {

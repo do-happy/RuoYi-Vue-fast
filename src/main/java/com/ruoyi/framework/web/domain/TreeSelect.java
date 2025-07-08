@@ -12,7 +12,7 @@ import com.ruoyi.project.system.domain.SysMenu;
 /**
  * Treeselect树结构实体类
  * 
- * @author ruoyi
+ * @Author lc
  */
 public class TreeSelect implements Serializable
 {

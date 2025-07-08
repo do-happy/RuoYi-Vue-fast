@@ -16,7 +16,7 @@ import com.ruoyi.framework.config.RuoYiConfig;
 /**
  * 图片处理工具类
  *
- * @author ruoyi
+ * @Author lc
  */
 public class ImageUtils
 {

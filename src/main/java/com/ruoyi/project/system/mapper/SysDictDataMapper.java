@@ -7,7 +7,7 @@ import com.ruoyi.project.system.domain.SysDictData;
 /**
  * 字典表 数据层
  * 
- * @author ruoyi
+ * @Author lc
  */
 public interface SysDictDataMapper
 {
