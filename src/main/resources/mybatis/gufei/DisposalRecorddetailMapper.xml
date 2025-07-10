@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.DisposalRecorddetailMapper">
+    
+    <resultMap type="DisposalRecorddetail" id="DisposalRecorddetailResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="disposalRecordId"    column="disposal_record_id"    />
+        <result property="sourceCode"    column="source_code"    />
+        <result property="sourceName"    column="source_name"    />
+        <result property="priorFormId"    column="prior_form_id"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="receiveTime"    column="receive_time"    />
+        <result property="receiveQuantity"    column="receive_quantity"    />
+        <result property="disposalMethod"    column="disposal_method"    />
+        <result property="handler"    column="handler"    />
+    </resultMap>
+
+    <sql id="selectDisposalRecorddetailVo">
+        select record_id, disposal_record_id, source_code, source_name, prior_form_id, waste_code, waste_name, receive_time, receive_quantity, disposal_method, handler from disposal_recorddetail
+    </sql>
+
+    <select id="selectDisposalRecorddetailList" parameterType="DisposalRecorddetail" resultMap="DisposalRecorddetailResult">
+        <include refid="selectDisposalRecorddetailVo"/>
+        <where>  
+            <if test="disposalRecordId != null  and disposalRecordId != ''"> and disposal_record_id = #{disposalRecordId}</if>
+            <if test="sourceCode != null  and sourceCode != ''"> and source_code = #{sourceCode}</if>
+            <if test="sourceName != null  and sourceName != ''"> and source_name like concat('%', #{sourceName}, '%')</if>
+            <if test="priorFormId != null  and priorFormId != ''"> and prior_form_id = #{priorFormId}</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="receiveTime != null "> and receive_time = #{receiveTime}</if>
+            <if test="receiveQuantity != null "> and receive_quantity = #{receiveQuantity}</if>
+            <if test="disposalMethod != null  and disposalMethod != ''"> and disposal_method = #{disposalMethod}</if>
+            <if test="handler != null  and handler != ''"> and handler = #{handler}</if>
+        </where>
+    </select>
+    
+    <select id="selectDisposalRecorddetailByRecordId" parameterType="String" resultMap="DisposalRecorddetailResult">
+        <include refid="selectDisposalRecorddetailVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <insert id="insertDisposalRecorddetail" parameterType="DisposalRecorddetail">
+        insert into disposal_recorddetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="disposalRecordId != null and disposalRecordId != ''">disposal_record_id,</if>
+            <if test="sourceCode != null">source_code,</if>
+            <if test="sourceName != null">source_name,</if>
+            <if test="priorFormId != null">prior_form_id,</if>
+            <if test="wasteCode != null">waste_code,</if>
+            <if test="wasteName != null">waste_name,</if>
+            <if test="receiveTime != null">receive_time,</if>
+            <if test="receiveQuantity != null">receive_quantity,</if>
+            <if test="disposalMethod != null and disposalMethod != ''">disposal_method,</if>
+            <if test="handler != null and handler != ''">handler,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="disposalRecordId != null and disposalRecordId != ''">#{disposalRecordId},</if>
+            <if test="sourceCode != null">#{sourceCode},</if>
+            <if test="sourceName != null">#{sourceName},</if>
+            <if test="priorFormId != null">#{priorFormId},</if>
+            <if test="wasteCode != null">#{wasteCode},</if>
+            <if test="wasteName != null">#{wasteName},</if>
+            <if test="receiveTime != null">#{receiveTime},</if>
+            <if test="receiveQuantity != null">#{receiveQuantity},</if>
+            <if test="disposalMethod != null and disposalMethod != ''">#{disposalMethod},</if>
+            <if test="handler != null and handler != ''">#{handler},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDisposalRecorddetail" parameterType="DisposalRecorddetail">
+        update disposal_recorddetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="disposalRecordId != null and disposalRecordId != ''">disposal_record_id = #{disposalRecordId},</if>
+            <if test="sourceCode != null">source_code = #{sourceCode},</if>
+            <if test="sourceName != null">source_name = #{sourceName},</if>
+            <if test="priorFormId != null">prior_form_id = #{priorFormId},</if>
+            <if test="wasteCode != null">waste_code = #{wasteCode},</if>
+            <if test="wasteName != null">waste_name = #{wasteName},</if>
+            <if test="receiveTime != null">receive_time = #{receiveTime},</if>
+            <if test="receiveQuantity != null">receive_quantity = #{receiveQuantity},</if>
+            <if test="disposalMethod != null and disposalMethod != ''">disposal_method = #{disposalMethod},</if>
+            <if test="handler != null and handler != ''">handler = #{handler},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteDisposalRecorddetailByRecordId" parameterType="String">
+        delete from disposal_recorddetail where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteDisposalRecorddetailByRecordIds" parameterType="String">
+        delete from disposal_recorddetail where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

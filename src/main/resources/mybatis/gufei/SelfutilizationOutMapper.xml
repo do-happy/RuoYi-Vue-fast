@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.SelfutilizationOutMapper">
+    
+    <resultMap type="SelfutilizationOut" id="SelfutilizationOutResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="facilityCode"    column="facility_code"    />
+        <result property="departmentLeader"    column="department_leader"    />
+        <result property="fillDate"    column="fill_date"    />
+    </resultMap>
+
+    <sql id="selectSelfutilizationOutVo">
+        select record_id, facility_code, department_leader, fill_date from selfutilization_out
+    </sql>
+
+    <select id="selectSelfutilizationOutList" parameterType="SelfutilizationOut" resultMap="SelfutilizationOutResult">
+        <include refid="selectSelfutilizationOutVo"/>
+        <where>  
+            <if test="facilityCode != null  and facilityCode != ''"> and facility_code = #{facilityCode}</if>
+            <if test="departmentLeader != null  and departmentLeader != ''"> and department_leader = #{departmentLeader}</if>
+            <if test="fillDate != null "> and fill_date = #{fillDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectSelfutilizationOutByRecordId" parameterType="String" resultMap="SelfutilizationOutResult">
+        <include refid="selectSelfutilizationOutVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <insert id="insertSelfutilizationOut" parameterType="SelfutilizationOut">
+        insert into selfutilization_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="facilityCode != null">facility_code,</if>
+            <if test="departmentLeader != null">department_leader,</if>
+            <if test="fillDate != null">fill_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="facilityCode != null">#{facilityCode},</if>
+            <if test="departmentLeader != null">#{departmentLeader},</if>
+            <if test="fillDate != null">#{fillDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSelfutilizationOut" parameterType="SelfutilizationOut">
+        update selfutilization_out
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="facilityCode != null">facility_code = #{facilityCode},</if>
+            <if test="departmentLeader != null">department_leader = #{departmentLeader},</if>
+            <if test="fillDate != null">fill_date = #{fillDate},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteSelfutilizationOutByRecordId" parameterType="String">
+        delete from selfutilization_out where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteSelfutilizationOutByRecordIds" parameterType="String">
+        delete from selfutilization_out where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

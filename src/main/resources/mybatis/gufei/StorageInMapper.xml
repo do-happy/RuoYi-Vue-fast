@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.StorageInMapper">
+    
+    <resultMap type="StorageIn" id="StorageInResult">
+        <result property="inId"    column="in_id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="sourceCode"    column="source_code"    />
+        <result property="sourceName"    column="source_name"    />
+        <result property="previousForm"    column="previous_form"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="inTime"    column="in_time"    />
+        <result property="inQuantity"    column="in_quantity"    />
+        <result property="transporter"    column="transporter"    />
+        <result property="handler"    column="handler"    />
+    </resultMap>
+
+    <sql id="selectStorageInVo">
+        select in_id, record_id, source_code, source_name, previous_form, waste_code, waste_name, in_time, in_quantity, transporter, handler from storage_in
+    </sql>
+
+    <select id="selectStorageInList" parameterType="StorageIn" resultMap="StorageInResult">
+        <include refid="selectStorageInVo"/>
+        <where>  
+            <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
+            <if test="sourceCode != null  and sourceCode != ''"> and source_code = #{sourceCode}</if>
+            <if test="sourceName != null  and sourceName != ''"> and source_name like concat('%', #{sourceName}, '%')</if>
+            <if test="previousForm != null  and previousForm != ''"> and previous_form = #{previousForm}</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="inTime != null "> and in_time = #{inTime}</if>
+            <if test="inQuantity != null "> and in_quantity = #{inQuantity}</if>
+            <if test="transporter != null  and transporter != ''"> and transporter = #{transporter}</if>
+            <if test="handler != null  and handler != ''"> and handler = #{handler}</if>
+        </where>
+    </select>
+    
+    <select id="selectStorageInByInId" parameterType="Long" resultMap="StorageInResult">
+        <include refid="selectStorageInVo"/>
+        where in_id = #{inId}
+    </select>
+
+    <insert id="insertStorageIn" parameterType="StorageIn" useGeneratedKeys="true" keyProperty="inId">
+        insert into storage_in
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">record_id,</if>
+            <if test="sourceCode != null">source_code,</if>
+            <if test="sourceName != null">source_name,</if>
+            <if test="previousForm != null and previousForm != ''">previous_form,</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code,</if>
+            <if test="wasteName != null and wasteName != ''">waste_name,</if>
+            <if test="inTime != null">in_time,</if>
+            <if test="inQuantity != null">in_quantity,</if>
+            <if test="transporter != null">transporter,</if>
+            <if test="handler != null and handler != ''">handler,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">#{recordId},</if>
+            <if test="sourceCode != null">#{sourceCode},</if>
+            <if test="sourceName != null">#{sourceName},</if>
+            <if test="previousForm != null and previousForm != ''">#{previousForm},</if>
+            <if test="wasteCode != null and wasteCode != ''">#{wasteCode},</if>
+            <if test="wasteName != null and wasteName != ''">#{wasteName},</if>
+            <if test="inTime != null">#{inTime},</if>
+            <if test="inQuantity != null">#{inQuantity},</if>
+            <if test="transporter != null">#{transporter},</if>
+            <if test="handler != null and handler != ''">#{handler},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStorageIn" parameterType="StorageIn">
+        update storage_in
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">record_id = #{recordId},</if>
+            <if test="sourceCode != null">source_code = #{sourceCode},</if>
+            <if test="sourceName != null">source_name = #{sourceName},</if>
+            <if test="previousForm != null and previousForm != ''">previous_form = #{previousForm},</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code = #{wasteCode},</if>
+            <if test="wasteName != null and wasteName != ''">waste_name = #{wasteName},</if>
+            <if test="inTime != null">in_time = #{inTime},</if>
+            <if test="inQuantity != null">in_quantity = #{inQuantity},</if>
+            <if test="transporter != null">transporter = #{transporter},</if>
+            <if test="handler != null and handler != ''">handler = #{handler},</if>
+        </trim>
+        where in_id = #{inId}
+    </update>
+
+    <delete id="deleteStorageInByInId" parameterType="Long">
+        delete from storage_in where in_id = #{inId}
+    </delete>
+
+    <delete id="deleteStorageInByInIds" parameterType="String">
+        delete from storage_in where in_id in 
+        <foreach item="inId" collection="array" open="(" separator="," close=")">
+            #{inId}
+        </foreach>
+    </delete>
+</mapper>

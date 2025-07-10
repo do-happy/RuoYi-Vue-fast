@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.SelfutilizationOutdetailMapper">
+    
+    <resultMap type="SelfutilizationOutdetail" id="SelfutilizationOutdetailResult">
+        <result property="ID"    column="ID"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="shipmentTime"    column="shipment_time"    />
+        <result property="shipmentQuantity"    column="shipment_quantity"    />
+        <result property="shipmentDestination"    column="shipment_destination"    />
+        <result property="departmentHandler"    column="department_handler"    />
+        <result property="transportHandler"    column="transport_handler"    />
+    </resultMap>
+
+    <sql id="selectSelfutilizationOutdetailVo">
+        select ID, record_id, product_name, shipment_time, shipment_quantity, shipment_destination, department_handler, transport_handler from selfutilization_outdetail
+    </sql>
+
+    <select id="selectSelfutilizationOutdetailList" parameterType="SelfutilizationOutdetail" resultMap="SelfutilizationOutdetailResult">
+        <include refid="selectSelfutilizationOutdetailVo"/>
+        <where>  
+            <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="shipmentTime != null "> and shipment_time = #{shipmentTime}</if>
+            <if test="shipmentQuantity != null "> and shipment_quantity = #{shipmentQuantity}</if>
+            <if test="shipmentDestination != null  and shipmentDestination != ''"> and shipment_destination = #{shipmentDestination}</if>
+            <if test="departmentHandler != null  and departmentHandler != ''"> and department_handler = #{departmentHandler}</if>
+            <if test="transportHandler != null  and transportHandler != ''"> and transport_handler = #{transportHandler}</if>
+        </where>
+    </select>
+    
+    <select id="selectSelfutilizationOutdetailByID" parameterType="String" resultMap="SelfutilizationOutdetailResult">
+        <include refid="selectSelfutilizationOutdetailVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertSelfutilizationOutdetail" parameterType="SelfutilizationOutdetail">
+        insert into selfutilization_outdetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">ID,</if>
+            <if test="recordId != null and recordId != ''">record_id,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="shipmentTime != null">shipment_time,</if>
+            <if test="shipmentQuantity != null">shipment_quantity,</if>
+            <if test="shipmentDestination != null">shipment_destination,</if>
+            <if test="departmentHandler != null">department_handler,</if>
+            <if test="transportHandler != null">transport_handler,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">#{ID},</if>
+            <if test="recordId != null and recordId != ''">#{recordId},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="shipmentTime != null">#{shipmentTime},</if>
+            <if test="shipmentQuantity != null">#{shipmentQuantity},</if>
+            <if test="shipmentDestination != null">#{shipmentDestination},</if>
+            <if test="departmentHandler != null">#{departmentHandler},</if>
+            <if test="transportHandler != null">#{transportHandler},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSelfutilizationOutdetail" parameterType="SelfutilizationOutdetail">
+        update selfutilization_outdetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">record_id = #{recordId},</if>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="shipmentTime != null">shipment_time = #{shipmentTime},</if>
+            <if test="shipmentQuantity != null">shipment_quantity = #{shipmentQuantity},</if>
+            <if test="shipmentDestination != null">shipment_destination = #{shipmentDestination},</if>
+            <if test="departmentHandler != null">department_handler = #{departmentHandler},</if>
+            <if test="transportHandler != null">transport_handler = #{transportHandler},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteSelfutilizationOutdetailByID" parameterType="String">
+        delete from selfutilization_outdetail where ID = #{ID}
+    </delete>
+
+    <delete id="deleteSelfutilizationOutdetailByIDs" parameterType="String">
+        delete from selfutilization_outdetail where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>

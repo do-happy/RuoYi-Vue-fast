@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.TransportRecorddetailMapper">
+    
+    <resultMap type="TransportRecorddetail" id="TransportRecorddetailResult">
+        <result property="id"    column="id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="departureTime"    column="departure_time"    />
+        <result property="departureQuantity"    column="departure_quantity"    />
+        <result property="departureHandler"    column="departure_handler"    />
+        <result property="transportCompany"    column="transport_company"    />
+        <result property="transportInfo"    column="transport_info"    />
+        <result property="transportMode"    column="transport_mode"    />
+        <result property="receivingCompany"    column="receiving_company"    />
+        <result property="flowType"    column="flow_type"    />
+    </resultMap>
+
+    <sql id="selectTransportRecorddetailVo">
+        select id, record_id, waste_code, waste_name, departure_time, departure_quantity, departure_handler, transport_company, transport_info, transport_mode, receiving_company, flow_type from transport_recorddetail
+    </sql>
+
+    <select id="selectTransportRecorddetailList" parameterType="TransportRecorddetail" resultMap="TransportRecorddetailResult">
+        <include refid="selectTransportRecorddetailVo"/>
+        <where>  
+            <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="departureTime != null "> and departure_time = #{departureTime}</if>
+            <if test="departureQuantity != null "> and departure_quantity = #{departureQuantity}</if>
+            <if test="departureHandler != null  and departureHandler != ''"> and departure_handler = #{departureHandler}</if>
+            <if test="transportCompany != null  and transportCompany != ''"> and transport_company = #{transportCompany}</if>
+            <if test="transportInfo != null  and transportInfo != ''"> and transport_info = #{transportInfo}</if>
+            <if test="transportMode != null  and transportMode != ''"> and transport_mode = #{transportMode}</if>
+            <if test="receivingCompany != null  and receivingCompany != ''"> and receiving_company = #{receivingCompany}</if>
+            <if test="flowType != null  and flowType != ''"> and flow_type = #{flowType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTransportRecorddetailById" parameterType="String" resultMap="TransportRecorddetailResult">
+        <include refid="selectTransportRecorddetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTransportRecorddetail" parameterType="TransportRecorddetail">
+        insert into transport_recorddetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="recordId != null and recordId != ''">record_id,</if>
+            <if test="wasteCode != null">waste_code,</if>
+            <if test="wasteName != null">waste_name,</if>
+            <if test="departureTime != null">departure_time,</if>
+            <if test="departureQuantity != null">departure_quantity,</if>
+            <if test="departureHandler != null">departure_handler,</if>
+            <if test="transportCompany != null">transport_company,</if>
+            <if test="transportInfo != null">transport_info,</if>
+            <if test="transportMode != null">transport_mode,</if>
+            <if test="receivingCompany != null">receiving_company,</if>
+            <if test="flowType != null">flow_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="recordId != null and recordId != ''">#{recordId},</if>
+            <if test="wasteCode != null">#{wasteCode},</if>
+            <if test="wasteName != null">#{wasteName},</if>
+            <if test="departureTime != null">#{departureTime},</if>
+            <if test="departureQuantity != null">#{departureQuantity},</if>
+            <if test="departureHandler != null">#{departureHandler},</if>
+            <if test="transportCompany != null">#{transportCompany},</if>
+            <if test="transportInfo != null">#{transportInfo},</if>
+            <if test="transportMode != null">#{transportMode},</if>
+            <if test="receivingCompany != null">#{receivingCompany},</if>
+            <if test="flowType != null">#{flowType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTransportRecorddetail" parameterType="TransportRecorddetail">
+        update transport_recorddetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">record_id = #{recordId},</if>
+            <if test="wasteCode != null">waste_code = #{wasteCode},</if>
+            <if test="wasteName != null">waste_name = #{wasteName},</if>
+            <if test="departureTime != null">departure_time = #{departureTime},</if>
+            <if test="departureQuantity != null">departure_quantity = #{departureQuantity},</if>
+            <if test="departureHandler != null">departure_handler = #{departureHandler},</if>
+            <if test="transportCompany != null">transport_company = #{transportCompany},</if>
+            <if test="transportInfo != null">transport_info = #{transportInfo},</if>
+            <if test="transportMode != null">transport_mode = #{transportMode},</if>
+            <if test="receivingCompany != null">receiving_company = #{receivingCompany},</if>
+            <if test="flowType != null">flow_type = #{flowType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTransportRecorddetailById" parameterType="String">
+        delete from transport_recorddetail where id = #{id}
+    </delete>
+
+    <delete id="deleteTransportRecorddetailByIds" parameterType="String">
+        delete from transport_recorddetail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

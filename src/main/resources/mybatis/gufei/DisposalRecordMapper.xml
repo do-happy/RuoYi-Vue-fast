@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.DisposalRecordMapper">
+    
+    <resultMap type="DisposalRecord" id="DisposalRecordResult">
+        <result property="disposalRecordId"    column="disposal_record_id"    />
+        <result property="facilityCode"    column="facility_code"    />
+        <result property="departmentHead"    column="department_head"    />
+        <result property="fillDate"    column="fill_date"    />
+    </resultMap>
+
+    <sql id="selectDisposalRecordVo">
+        select disposal_record_id, facility_code, department_head, fill_date from disposal_record
+    </sql>
+
+    <select id="selectDisposalRecordList" parameterType="DisposalRecord" resultMap="DisposalRecordResult">
+        <include refid="selectDisposalRecordVo"/>
+        <where>  
+            <if test="facilityCode != null  and facilityCode != ''"> and facility_code = #{facilityCode}</if>
+            <if test="departmentHead != null  and departmentHead != ''"> and department_head = #{departmentHead}</if>
+            <if test="fillDate != null "> and fill_date = #{fillDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectDisposalRecordByDisposalRecordId" parameterType="String" resultMap="DisposalRecordResult">
+        <include refid="selectDisposalRecordVo"/>
+        where disposal_record_id = #{disposalRecordId}
+    </select>
+
+    <insert id="insertDisposalRecord" parameterType="DisposalRecord">
+        insert into disposal_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="disposalRecordId != null">disposal_record_id,</if>
+            <if test="facilityCode != null and facilityCode != ''">facility_code,</if>
+            <if test="departmentHead != null and departmentHead != ''">department_head,</if>
+            <if test="fillDate != null">fill_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="disposalRecordId != null">#{disposalRecordId},</if>
+            <if test="facilityCode != null and facilityCode != ''">#{facilityCode},</if>
+            <if test="departmentHead != null and departmentHead != ''">#{departmentHead},</if>
+            <if test="fillDate != null">#{fillDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDisposalRecord" parameterType="DisposalRecord">
+        update disposal_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="facilityCode != null and facilityCode != ''">facility_code = #{facilityCode},</if>
+            <if test="departmentHead != null and departmentHead != ''">department_head = #{departmentHead},</if>
+            <if test="fillDate != null">fill_date = #{fillDate},</if>
+        </trim>
+        where disposal_record_id = #{disposalRecordId}
+    </update>
+
+    <delete id="deleteDisposalRecordByDisposalRecordId" parameterType="String">
+        delete from disposal_record where disposal_record_id = #{disposalRecordId}
+    </delete>
+
+    <delete id="deleteDisposalRecordByDisposalRecordIds" parameterType="String">
+        delete from disposal_record where disposal_record_id in 
+        <foreach item="disposalRecordId" collection="array" open="(" separator="," close=")">
+            #{disposalRecordId}
+        </foreach>
+    </delete>
+</mapper>

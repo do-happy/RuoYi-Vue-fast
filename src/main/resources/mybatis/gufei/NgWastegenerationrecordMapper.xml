@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.NgWastegenerationrecordMapper">
+    
+    <resultMap type="NgWastegenerationrecord" id="NgWastegenerationrecordResult">
+        <result property="RecordID"    column="RecordID"    />
+        <result property="ProductionFacilityCode"    column="ProductionFacilityCode"    />
+        <result property="DepartmentHead"    column="DepartmentHead"    />
+        <result property="FillingDate"    column="FillingDate"    />
+    </resultMap>
+
+    <sql id="selectNgWastegenerationrecordVo">
+        select RecordID, ProductionFacilityCode, DepartmentHead, FillingDate from ng_wastegenerationrecord
+    </sql>
+
+    <select id="selectNgWastegenerationrecordList" parameterType="NgWastegenerationrecord" resultMap="NgWastegenerationrecordResult">
+        <include refid="selectNgWastegenerationrecordVo"/>
+        <where>  
+            <if test="ProductionFacilityCode != null  and ProductionFacilityCode != ''"> and ProductionFacilityCode = #{ProductionFacilityCode}</if>
+            <if test="DepartmentHead != null  and DepartmentHead != ''"> and DepartmentHead = #{DepartmentHead}</if>
+            <if test="FillingDate != null "> and FillingDate = #{FillingDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectNgWastegenerationrecordByRecordID" parameterType="String" resultMap="NgWastegenerationrecordResult">
+        <include refid="selectNgWastegenerationrecordVo"/>
+        where RecordID = #{RecordID}
+    </select>
+
+    <insert id="insertNgWastegenerationrecord" parameterType="NgWastegenerationrecord">
+        insert into ng_wastegenerationrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="RecordID != null">RecordID,</if>
+            <if test="ProductionFacilityCode != null">ProductionFacilityCode,</if>
+            <if test="DepartmentHead != null">DepartmentHead,</if>
+            <if test="FillingDate != null">FillingDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="RecordID != null">#{RecordID},</if>
+            <if test="ProductionFacilityCode != null">#{ProductionFacilityCode},</if>
+            <if test="DepartmentHead != null">#{DepartmentHead},</if>
+            <if test="FillingDate != null">#{FillingDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNgWastegenerationrecord" parameterType="NgWastegenerationrecord">
+        update ng_wastegenerationrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ProductionFacilityCode != null">ProductionFacilityCode = #{ProductionFacilityCode},</if>
+            <if test="DepartmentHead != null">DepartmentHead = #{DepartmentHead},</if>
+            <if test="FillingDate != null">FillingDate = #{FillingDate},</if>
+        </trim>
+        where RecordID = #{RecordID}
+    </update>
+
+    <delete id="deleteNgWastegenerationrecordByRecordID" parameterType="String">
+        delete from ng_wastegenerationrecord where RecordID = #{RecordID}
+    </delete>
+
+    <delete id="deleteNgWastegenerationrecordByRecordIDs" parameterType="String">
+        delete from ng_wastegenerationrecord where RecordID in 
+        <foreach item="RecordID" collection="array" open="(" separator="," close=")">
+            #{RecordID}
+        </foreach>
+    </delete>
+</mapper>

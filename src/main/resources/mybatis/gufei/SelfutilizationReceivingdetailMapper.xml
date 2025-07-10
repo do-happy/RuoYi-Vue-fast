@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.SelfutilizationReceivingdetailMapper">
+    
+    <resultMap type="SelfutilizationReceivingdetail" id="SelfutilizationReceivingdetailResult">
+        <result property="ID"    column="ID"    />
+        <result property="RecordID"    column="RecordID"    />
+        <result property="sourceCode"    column="source_code"    />
+        <result property="sourceName"    column="source_name"    />
+        <result property="previousForm"    column="previous_form"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="receivingTime"    column="Receiving_time"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="transportation operator"    column="transportation_ operator"    />
+        <result property="department"    column="department"    />
+    </resultMap>
+
+    <sql id="selectSelfutilizationReceivingdetailVo">
+        select ID, RecordID, source_code, source_name, previous_form, waste_code, waste_name, Receiving_time, quantity, transportation_ operator, department from selfutilization_receivingdetail
+    </sql>
+
+    <select id="selectSelfutilizationReceivingdetailList" parameterType="SelfutilizationReceivingdetail" resultMap="SelfutilizationReceivingdetailResult">
+        <include refid="selectSelfutilizationReceivingdetailVo"/>
+        <where>  
+            <if test="RecordID != null  and RecordID != ''"> and RecordID = #{RecordID}</if>
+            <if test="sourceCode != null  and sourceCode != ''"> and source_code = #{sourceCode}</if>
+            <if test="sourceName != null  and sourceName != ''"> and source_name like concat('%', #{sourceName}, '%')</if>
+            <if test="previousForm != null  and previousForm != ''"> and previous_form = #{previousForm}</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="receivingTime != null "> and Receiving_time = #{receivingTime}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="transportation operator != null  and transportation operator != ''"> and transportation_ operator = #{transportation operator}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+        </where>
+    </select>
+    
+    <select id="selectSelfutilizationReceivingdetailByID" parameterType="String" resultMap="SelfutilizationReceivingdetailResult">
+        <include refid="selectSelfutilizationReceivingdetailVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertSelfutilizationReceivingdetail" parameterType="SelfutilizationReceivingdetail">
+        insert into selfutilization_receivingdetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">ID,</if>
+            <if test="RecordID != null and RecordID != ''">RecordID,</if>
+            <if test="sourceCode != null">source_code,</if>
+            <if test="sourceName != null">source_name,</if>
+            <if test="previousForm != null">previous_form,</if>
+            <if test="wasteCode != null">waste_code,</if>
+            <if test="wasteName != null">waste_name,</if>
+            <if test="receivingTime != null">Receiving_time,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="transportation operator != null">transportation_ operator,</if>
+            <if test="department != null">department,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">#{ID},</if>
+            <if test="RecordID != null and RecordID != ''">#{RecordID},</if>
+            <if test="sourceCode != null">#{sourceCode},</if>
+            <if test="sourceName != null">#{sourceName},</if>
+            <if test="previousForm != null">#{previousForm},</if>
+            <if test="wasteCode != null">#{wasteCode},</if>
+            <if test="wasteName != null">#{wasteName},</if>
+            <if test="receivingTime != null">#{receivingTime},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="transportation operator != null">#{transportation operator},</if>
+            <if test="department != null">#{department},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSelfutilizationReceivingdetail" parameterType="SelfutilizationReceivingdetail">
+        update selfutilization_receivingdetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="RecordID != null and RecordID != ''">RecordID = #{RecordID},</if>
+            <if test="sourceCode != null">source_code = #{sourceCode},</if>
+            <if test="sourceName != null">source_name = #{sourceName},</if>
+            <if test="previousForm != null">previous_form = #{previousForm},</if>
+            <if test="wasteCode != null">waste_code = #{wasteCode},</if>
+            <if test="wasteName != null">waste_name = #{wasteName},</if>
+            <if test="receivingTime != null">Receiving_time = #{receivingTime},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="transportation operator != null">transportation_ operator = #{transportation operator},</if>
+            <if test="department != null">department = #{department},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteSelfutilizationReceivingdetailByID" parameterType="String">
+        delete from selfutilization_receivingdetail where ID = #{ID}
+    </delete>
+
+    <delete id="deleteSelfutilizationReceivingdetailByIDs" parameterType="String">
+        delete from selfutilization_receivingdetail where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>

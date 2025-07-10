@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.TransportRecordMapper">
+    
+    <resultMap type="TransportRecord" id="TransportRecordResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="responsibleSignature"    column="responsible_signature"    />
+        <result property="fillDate"    column="fill_date"    />
+    </resultMap>
+
+    <sql id="selectTransportRecordVo">
+        select record_id, responsible_signature, fill_date from transport_record
+    </sql>
+
+    <select id="selectTransportRecordList" parameterType="TransportRecord" resultMap="TransportRecordResult">
+        <include refid="selectTransportRecordVo"/>
+        <where>  
+            <if test="responsibleSignature != null  and responsibleSignature != ''"> and responsible_signature = #{responsibleSignature}</if>
+            <if test="fillDate != null "> and fill_date = #{fillDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectTransportRecordByRecordId" parameterType="String" resultMap="TransportRecordResult">
+        <include refid="selectTransportRecordVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <insert id="insertTransportRecord" parameterType="TransportRecord">
+        insert into transport_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="responsibleSignature != null and responsibleSignature != ''">responsible_signature,</if>
+            <if test="fillDate != null">fill_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="responsibleSignature != null and responsibleSignature != ''">#{responsibleSignature},</if>
+            <if test="fillDate != null">#{fillDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTransportRecord" parameterType="TransportRecord">
+        update transport_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="responsibleSignature != null and responsibleSignature != ''">responsible_signature = #{responsibleSignature},</if>
+            <if test="fillDate != null">fill_date = #{fillDate},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteTransportRecordByRecordId" parameterType="String">
+        delete from transport_record where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteTransportRecordByRecordIds" parameterType="String">
+        delete from transport_record where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.NgWastegenerationrecorddetailMapper">
+    
+    <resultMap type="NgWastegenerationrecorddetail" id="NgWastegenerationrecorddetailResult">
+        <result property="ID"    column="ID"    />
+        <result property="MainRecordId"    column="MainRecordID"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteCategory"    column="waste_category"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="wasteDescription"    column="waste_description"    />
+        <result property="wasteType"    column="waste_type"    />
+        <result property="productionPhase"    column="production_phase"    />
+        <result property="physicalState"    column="physical_state"    />
+        <result property="mainComponents"    column="main_components"    />
+        <result property="pollutionCharacteristic"    column="pollution_characteristic"    />
+        <result property="Coefficient"    column="Coefficient"    />
+        <result property="GenerationTime"    column="GenerationTime"    />
+        <result property="GenerationQuantity"    column="GenerationQuantity"    />
+        <result property="TransferTime"    column="TransferTime"    />
+        <result property="TransferDestination"    column="TransferDestination"    />
+        <result property="GenerationDepartmentOperator"    column="GenerationDepartmentOperator"    />
+        <result property="TransportationOperator"    column="TransportationOperator"    />
+    </resultMap>
+
+    <sql id="selectNgWastegenerationrecorddetailVo">
+        select ID, MainRecordID, waste_code, waste_category, waste_name, waste_description, waste_type, production_phase, physical_state, main_components, pollution_characteristic, Coefficient, GenerationTime, GenerationQuantity, TransferTime, TransferDestination, GenerationDepartmentOperator, TransportationOperator from ng_wastegenerationrecorddetail
+    </sql>
+
+    <select id="selectNgWastegenerationrecorddetailList" parameterType="NgWastegenerationrecorddetail" resultMap="NgWastegenerationrecorddetailResult">
+        <include refid="selectNgWastegenerationrecorddetailVo"/>
+        <where>  
+            <if test="MainRecordID != null  and MainRecordID != ''"> and MainRecordID = #{MainRecordID}</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteCategory != null  and wasteCategory != ''"> and waste_category = #{wasteCategory}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="wasteDescription != null  and wasteDescription != ''"> and waste_description = #{wasteDescription}</if>
+            <if test="wasteType != null "> and waste_type = #{wasteType}</if>
+            <if test="productionPhase != null  and productionPhase != ''"> and production_phase = #{productionPhase}</if>
+            <if test="physicalState != null  and physicalState != ''"> and physical_state = #{physicalState}</if>
+            <if test="mainComponents != null  and mainComponents != ''"> and main_components = #{mainComponents}</if>
+            <if test="pollutionCharacteristic != null  and pollutionCharacteristic != ''"> and pollution_characteristic = #{pollutionCharacteristic}</if>
+            <if test="Coefficient != null "> and Coefficient = #{Coefficient}</if>
+            <if test="GenerationTime != null "> and GenerationTime = #{GenerationTime}</if>
+            <if test="GenerationQuantity != null "> and GenerationQuantity = #{GenerationQuantity}</if>
+            <if test="TransferTime != null "> and TransferTime = #{TransferTime}</if>
+            <if test="TransferDestination != null  and TransferDestination != ''"> and TransferDestination = #{TransferDestination}</if>
+            <if test="GenerationDepartmentOperator != null  and GenerationDepartmentOperator != ''"> and GenerationDepartmentOperator = #{GenerationDepartmentOperator}</if>
+            <if test="TransportationOperator != null  and TransportationOperator != ''"> and TransportationOperator = #{TransportationOperator}</if>
+        </where>
+    </select>
+    
+    <select id="selectNgWastegenerationrecorddetailByID" parameterType="String" resultMap="NgWastegenerationrecorddetailResult">
+        <include refid="selectNgWastegenerationrecorddetailVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertNgWastegenerationrecorddetail" parameterType="NgWastegenerationrecorddetail">
+        insert into ng_wastegenerationrecorddetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">ID,</if>
+            <if test="MainRecordID != null and MainRecordID != ''">MainRecordID,</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code,</if>
+            <if test="wasteCategory != null">waste_category,</if>
+            <if test="wasteName != null">waste_name,</if>
+            <if test="wasteDescription != null">waste_description,</if>
+            <if test="wasteType != null">waste_type,</if>
+            <if test="productionPhase != null">production_phase,</if>
+            <if test="physicalState != null">physical_state,</if>
+            <if test="mainComponents != null">main_components,</if>
+            <if test="pollutionCharacteristic != null">pollution_characteristic,</if>
+            <if test="Coefficient != null">Coefficient,</if>
+            <if test="GenerationTime != null">GenerationTime,</if>
+            <if test="GenerationQuantity != null">GenerationQuantity,</if>
+            <if test="TransferTime != null">TransferTime,</if>
+            <if test="TransferDestination != null">TransferDestination,</if>
+            <if test="GenerationDepartmentOperator != null">GenerationDepartmentOperator,</if>
+            <if test="TransportationOperator != null">TransportationOperator,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">#{ID},</if>
+            <if test="MainRecordID != null and MainRecordID != ''">#{MainRecordID},</if>
+            <if test="wasteCode != null and wasteCode != ''">#{wasteCode},</if>
+            <if test="wasteCategory != null">#{wasteCategory},</if>
+            <if test="wasteName != null">#{wasteName},</if>
+            <if test="wasteDescription != null">#{wasteDescription},</if>
+            <if test="wasteType != null">#{wasteType},</if>
+            <if test="productionPhase != null">#{productionPhase},</if>
+            <if test="physicalState != null">#{physicalState},</if>
+            <if test="mainComponents != null">#{mainComponents},</if>
+            <if test="pollutionCharacteristic != null">#{pollutionCharacteristic},</if>
+            <if test="Coefficient != null">#{Coefficient},</if>
+            <if test="GenerationTime != null">#{GenerationTime},</if>
+            <if test="GenerationQuantity != null">#{GenerationQuantity},</if>
+            <if test="TransferTime != null">#{TransferTime},</if>
+            <if test="TransferDestination != null">#{TransferDestination},</if>
+            <if test="GenerationDepartmentOperator != null">#{GenerationDepartmentOperator},</if>
+            <if test="TransportationOperator != null">#{TransportationOperator},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNgWastegenerationrecorddetail" parameterType="NgWastegenerationrecorddetail">
+        update ng_wastegenerationrecorddetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="MainRecordID != null and MainRecordID != ''">MainRecordID = #{MainRecordID},</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code = #{wasteCode},</if>
+            <if test="wasteCategory != null">waste_category = #{wasteCategory},</if>
+            <if test="wasteName != null">waste_name = #{wasteName},</if>
+            <if test="wasteDescription != null">waste_description = #{wasteDescription},</if>
+            <if test="wasteType != null">waste_type = #{wasteType},</if>
+            <if test="productionPhase != null">production_phase = #{productionPhase},</if>
+            <if test="physicalState != null">physical_state = #{physicalState},</if>
+            <if test="mainComponents != null">main_components = #{mainComponents},</if>
+            <if test="pollutionCharacteristic != null">pollution_characteristic = #{pollutionCharacteristic},</if>
+            <if test="Coefficient != null">Coefficient = #{Coefficient},</if>
+            <if test="GenerationTime != null">GenerationTime = #{GenerationTime},</if>
+            <if test="GenerationQuantity != null">GenerationQuantity = #{GenerationQuantity},</if>
+            <if test="TransferTime != null">TransferTime = #{TransferTime},</if>
+            <if test="TransferDestination != null">TransferDestination = #{TransferDestination},</if>
+            <if test="GenerationDepartmentOperator != null">GenerationDepartmentOperator = #{GenerationDepartmentOperator},</if>
+            <if test="TransportationOperator != null">TransportationOperator = #{TransportationOperator},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteNgWastegenerationrecorddetailByID" parameterType="String">
+        delete from ng_wastegenerationrecorddetail where ID = #{ID}
+    </delete>
+
+    <delete id="deleteNgWastegenerationrecorddetailByIDs" parameterType="String">
+        delete from ng_wastegenerationrecorddetail where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>

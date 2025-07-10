@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.StorageOutMapper">
+    
+    <resultMap type="StorageOut" id="StorageOutResult">
+        <result property="outId"    column="out_id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="sourceCode"    column="source_code"    />
+        <result property="sourceName"    column="source_name"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="outTime"    column="out_time"    />
+        <result property="outQuantity"    column="out_quantity"    />
+        <result property="destination"    column="destination"    />
+        <result property="transporter"    column="transporter"    />
+        <result property="handler"    column="handler"    />
+    </resultMap>
+
+    <sql id="selectStorageOutVo">
+        select out_id, record_id, source_code, source_name, waste_code, waste_name, out_time, out_quantity, destination, transporter, handler from storage_out
+    </sql>
+
+    <select id="selectStorageOutList" parameterType="StorageOut" resultMap="StorageOutResult">
+        <include refid="selectStorageOutVo"/>
+        <where>  
+            <if test="recordId != null  and recordId != ''"> and record_id = #{recordId}</if>
+            <if test="sourceCode != null  and sourceCode != ''"> and source_code = #{sourceCode}</if>
+            <if test="sourceName != null  and sourceName != ''"> and source_name like concat('%', #{sourceName}, '%')</if>
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="outTime != null "> and out_time = #{outTime}</if>
+            <if test="outQuantity != null "> and out_quantity = #{outQuantity}</if>
+            <if test="destination != null  and destination != ''"> and destination = #{destination}</if>
+            <if test="transporter != null  and transporter != ''"> and transporter = #{transporter}</if>
+            <if test="handler != null  and handler != ''"> and handler = #{handler}</if>
+        </where>
+    </select>
+    
+    <select id="selectStorageOutByOutId" parameterType="Long" resultMap="StorageOutResult">
+        <include refid="selectStorageOutVo"/>
+        where out_id = #{outId}
+    </select>
+
+    <insert id="insertStorageOut" parameterType="StorageOut">
+        insert into storage_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="outId != null">out_id,</if>
+            <if test="recordId != null and recordId != ''">record_id,</if>
+            <if test="sourceCode != null">source_code,</if>
+            <if test="sourceName != null">source_name,</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code,</if>
+            <if test="wasteName != null and wasteName != ''">waste_name,</if>
+            <if test="outTime != null">out_time,</if>
+            <if test="outQuantity != null">out_quantity,</if>
+            <if test="destination != null and destination != ''">destination,</if>
+            <if test="transporter != null">transporter,</if>
+            <if test="handler != null and handler != ''">handler,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="outId != null">#{outId},</if>
+            <if test="recordId != null and recordId != ''">#{recordId},</if>
+            <if test="sourceCode != null">#{sourceCode},</if>
+            <if test="sourceName != null">#{sourceName},</if>
+            <if test="wasteCode != null and wasteCode != ''">#{wasteCode},</if>
+            <if test="wasteName != null and wasteName != ''">#{wasteName},</if>
+            <if test="outTime != null">#{outTime},</if>
+            <if test="outQuantity != null">#{outQuantity},</if>
+            <if test="destination != null and destination != ''">#{destination},</if>
+            <if test="transporter != null">#{transporter},</if>
+            <if test="handler != null and handler != ''">#{handler},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStorageOut" parameterType="StorageOut">
+        update storage_out
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null and recordId != ''">record_id = #{recordId},</if>
+            <if test="sourceCode != null">source_code = #{sourceCode},</if>
+            <if test="sourceName != null">source_name = #{sourceName},</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code = #{wasteCode},</if>
+            <if test="wasteName != null and wasteName != ''">waste_name = #{wasteName},</if>
+            <if test="outTime != null">out_time = #{outTime},</if>
+            <if test="outQuantity != null">out_quantity = #{outQuantity},</if>
+            <if test="destination != null and destination != ''">destination = #{destination},</if>
+            <if test="transporter != null">transporter = #{transporter},</if>
+            <if test="handler != null and handler != ''">handler = #{handler},</if>
+        </trim>
+        where out_id = #{outId}
+    </update>
+
+    <delete id="deleteStorageOutByOutId" parameterType="Long">
+        delete from storage_out where out_id = #{outId}
+    </delete>
+
+    <delete id="deleteStorageOutByOutIds" parameterType="String">
+        delete from storage_out where out_id in 
+        <foreach item="outId" collection="array" open="(" separator="," close=")">
+            #{outId}
+        </foreach>
+    </delete>
+</mapper>

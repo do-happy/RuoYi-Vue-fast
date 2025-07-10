@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.StorageRecordsMapper">
+    
+    <resultMap type="StorageRecords" id="StorageRecordsResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="facilityCode"    column="facility_code"    />
+        <result property="departmentHead"    column="department_head"    />
+        <result property="fillDate"    column="fill_date"    />
+    </resultMap>
+
+    <sql id="selectStorageRecordsVo">
+        select record_id, facility_code, department_head, fill_date from storage_records
+    </sql>
+
+    <select id="selectStorageRecordsList" parameterType="StorageRecords" resultMap="StorageRecordsResult">
+        <include refid="selectStorageRecordsVo"/>
+        <where>  
+            <if test="facilityCode != null  and facilityCode != ''"> and facility_code = #{facilityCode}</if>
+            <if test="departmentHead != null  and departmentHead != ''"> and department_head = #{departmentHead}</if>
+            <if test="fillDate != null "> and fill_date = #{fillDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectStorageRecordsByRecordId" parameterType="String" resultMap="StorageRecordsResult">
+        <include refid="selectStorageRecordsVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <insert id="insertStorageRecords" parameterType="StorageRecords">
+        insert into storage_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="facilityCode != null and facilityCode != ''">facility_code,</if>
+            <if test="departmentHead != null and departmentHead != ''">department_head,</if>
+            <if test="fillDate != null">fill_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="facilityCode != null and facilityCode != ''">#{facilityCode},</if>
+            <if test="departmentHead != null and departmentHead != ''">#{departmentHead},</if>
+            <if test="fillDate != null">#{fillDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStorageRecords" parameterType="StorageRecords">
+        update storage_records
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="facilityCode != null and facilityCode != ''">facility_code = #{facilityCode},</if>
+            <if test="departmentHead != null and departmentHead != ''">department_head = #{departmentHead},</if>
+            <if test="fillDate != null">fill_date = #{fillDate},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteStorageRecordsByRecordId" parameterType="String">
+        delete from storage_records where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteStorageRecordsByRecordIds" parameterType="String">
+        delete from storage_records where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.gufei.mapper.NgWasteMapper">
+    
+    <resultMap type="NgWaste" id="NgWasteResult">
+        <result property="ID"    column="ID"    />
+        <result property="wasteCode"    column="waste_code"    />
+        <result property="wasteCategory"    column="waste_category"    />
+        <result property="wasteName"    column="waste_name"    />
+        <result property="wasteDescription"    column="waste_description"    />
+        <result property="wasteType"    column="waste_type"    />
+        <result property="productionPhase"    column="production_phase"    />
+        <result property="physicalState"    column="physical_state"    />
+        <result property="mainComponents"    column="main_components"    />
+        <result property="pollutionCharacteristic"    column="pollution_characteristic"    />
+    </resultMap>
+
+    <sql id="selectNgWasteVo">
+        select ID, waste_code, waste_category, waste_name, waste_description, waste_type, production_phase, physical_state, main_components, pollution_characteristic from ng_waste
+    </sql>
+
+    <select id="selectNgWasteList" parameterType="NgWaste" resultMap="NgWasteResult">
+        <include refid="selectNgWasteVo"/>
+        <where>  
+            <if test="wasteCode != null  and wasteCode != ''"> and waste_code = #{wasteCode}</if>
+            <if test="wasteCategory != null  and wasteCategory != ''"> and waste_category = #{wasteCategory}</if>
+            <if test="wasteName != null  and wasteName != ''"> and waste_name like concat('%', #{wasteName}, '%')</if>
+            <if test="wasteDescription != null  and wasteDescription != ''"> and waste_description = #{wasteDescription}</if>
+            <if test="wasteType != null "> and waste_type = #{wasteType}</if>
+            <if test="productionPhase != null  and productionPhase != ''"> and production_phase = #{productionPhase}</if>
+            <if test="physicalState != null  and physicalState != ''"> and physical_state = #{physicalState}</if>
+            <if test="mainComponents != null  and mainComponents != ''"> and main_components = #{mainComponents}</if>
+            <if test="pollutionCharacteristic != null  and pollutionCharacteristic != ''"> and pollution_characteristic = #{pollutionCharacteristic}</if>
+        </where>
+    </select>
+    
+    <select id="selectNgWasteByID" parameterType="String" resultMap="NgWasteResult">
+        <include refid="selectNgWasteVo"/>
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertNgWaste" parameterType="NgWaste">
+        insert into ng_waste
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">ID,</if>
+            <if test="wasteCode != null and wasteCode != ''">waste_code,</if>
+            <if test="wasteCategory != null and wasteCategory != ''">waste_category,</if>
+            <if test="wasteName != null">waste_name,</if>
+            <if test="wasteDescription != null">waste_description,</if>
+            <if test="wasteType != null">waste_type,</if>
+            <if test="productionPhase != null">production_phase,</if>
+            <if test="physicalState != null">physical_state,</if>
+            <if test="mainComponents != null">main_components,</if>
+            <if test="pollutionCharacteristic != null">pollution_characteristic,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">#{ID},</if>
+            <if test="wasteCode != null and wasteCode != ''">#{wasteCode},</if>
+            <if test="wasteCategory != null and wasteCategory != ''">#{wasteCategory},</if>
+            <if test="wasteName != null">#{wasteName},</if>
+            <if test="wasteDescription != null">#{wasteDescription},</if>
+            <if test="wasteType != null">#{wasteType},</if>
+            <if test="productionPhase != null">#{productionPhase},</if>
+            <if test="physicalState != null">#{physicalState},</if>
+            <if test="mainComponents != null">#{mainComponents},</if>
+            <if test="pollutionCharacteristic != null">#{pollutionCharacteristic},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNgWaste" parameterType="NgWaste">
+        update ng_waste
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="wasteCode != null and wasteCode != ''">waste_code = #{wasteCode},</if>
+            <if test="wasteCategory != null and wasteCategory != ''">waste_category = #{wasteCategory},</if>
+            <if test="wasteName != null">waste_name = #{wasteName},</if>
+            <if test="wasteDescription != null">waste_description = #{wasteDescription},</if>
+            <if test="wasteType != null">waste_type = #{wasteType},</if>
+            <if test="productionPhase != null">production_phase = #{productionPhase},</if>
+            <if test="physicalState != null">physical_state = #{physicalState},</if>
+            <if test="mainComponents != null">main_components = #{mainComponents},</if>
+            <if test="pollutionCharacteristic != null">pollution_characteristic = #{pollutionCharacteristic},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteNgWasteByID" parameterType="String">
+        delete from ng_waste where ID = #{ID}
+    </delete>
+
+    <delete id="deleteNgWasteByIDs" parameterType="String">
+        delete from ng_waste where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>
